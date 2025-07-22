@@ -1,0 +1,32 @@
+import React from 'react'
+import { assets } from '../assets/assets'
+
+const Description = () => {
+  return (
+    <div className='flex flex-col items-center justify-center my-24 p-6 md:px-28'>
+        <h1 className='text-3xl sm:text-4xl font-semibold mb-2'>Create AI Images</h1>
+        <p className='text-gray-500 mb-8'>Turn your imagination into art</p>
+
+    <div className='flex flex-col gap-5 md:gap-14 md:flex-row items-center'>
+        <img src={assets.sample_img_1}
+    alt="AI-Powered Text to Image Generator"
+    className="w-80 xl:w-96 rounded-lg"/>
+   <div>
+    <h2 className='text-3xl font-medium max-w-lg mb-4'>Introducing the AI-Powered Text to Image Generator</h2>
+    <p className='text-gray-600 mb-4'>
+  Bring your ideas to life with our free AI image generator. Just type a prompt, and watch as your words turn into stunning, high-quality visuals — from unique art to realistic product shots and beyond.
+</p>
+
+<p className='text-gray-600'>
+  Whether you're imagining characters, scenes, or things that don't even exist yet, our cutting-edge AI makes it possible in seconds. Describe it, click generate, and explore endless creative possibilities.
+</p>
+
+  </div>
+</div>
+
+</div>
+
+  )
+}
+
+export default Description
