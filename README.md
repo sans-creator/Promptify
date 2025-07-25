@@ -1,5 +1,4 @@
 
-```markdown
 # Promptify
 
 **Promptify** is a full-stack AI image generation platform that transforms text prompts into stunning visuals. Built with modern technologies, it features a clean UI, a credit-based system, and secure payment integration via Razorpay.
