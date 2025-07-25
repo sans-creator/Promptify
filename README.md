@@ -138,12 +138,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- **ClipDrop API**: [https://clipdrop.co/apis](https://clipdrop.co/apis)
-- **Razorpay**: [https://razorpay.com/](https://razorpay.com/)
-- **MongoDB Atlas**: [https://www.mongodb.com/atlas](https://www.mongodb.com/atlas)
+- ClipDrop API: [https://clipdrop.co/apis](https://clipdrop.co/apis)
+- Razorpay: [https://razorpay.com/](https://razorpay.com/)
+- MongoDB Atlas: [https://www.mongodb.com/atlas](https://www.mongodb.com/atlas)
 
 ---
 
-**Made with ❤️ by Sanskar**
+Made with ❤️ by Sanskar
 ```
 
