@@ -1,7 +1,5 @@
 import logo from './logo.svg'
 import logo_icon from './logo_icon.svg'
-import facebook_icon from './facebook_icon.svg'
-import instagram_icon from './instagram_icon.svg'
 import twitter_icon from './twitter_icon.svg'
 import star_icon from './star_icon.svg'
 import rating_star from './rating_star.svg'
@@ -18,12 +16,19 @@ import cross_icon from './cross_icon.svg'
 import star_group from './star_group.png'
 import credit_star from './credit_star.svg'
 import profile_icon from './profile_icon.png'
+import mainPage from './mainPage.jpeg'
+import black_on_trans from './black_on_trans.png'
+import linkedIn from './linkedin.png'
+import github from './github.png'
+import email from './email.png'
+
+
+
+
 
 export const assets = {
     logo,
     logo_icon,
-    facebook_icon,
-    instagram_icon,
     twitter_icon,
     star_icon,
     rating_star,
@@ -34,7 +39,12 @@ export const assets = {
     cross_icon,
     star_group,
     credit_star,
-    profile_icon
+    profile_icon,
+    mainPage,
+    black_on_trans,
+    github,
+    linkedIn,
+    email
 }
 
 export const stepsData = [
@@ -56,28 +66,29 @@ export const stepsData = [
   ];
 
 export const testimonialsData = [
-    {
-        image:profile_img_1,
-        name:'Donald Jackman',
-        role:'Graphic Designer',
-        stars:5,
-        text:`I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`
-    },
-    {
-        image:profile_img_2,
-        name:'Richard Nelson',
-        role:'Content Creator',
-        stars:5,
-        text:`I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`
-    },
-    {
-        image:profile_img_1,
-        name:'Donald Jackman',
-        role:' Graphic Designer',
-        stars:5,
-        text:`I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`
-    },
-]
+  {
+    image: profile_img_1,
+    name: 'Aarav Mehta',
+    role: 'UX Designer',
+    stars: 5,
+    text: `This AI image generator has transformed how I visualize concepts. Just type a prompt and watch it come to life — truly impressive!`
+  },
+  {
+    image: profile_img_2,
+    name: 'Priya Sharma',
+    role: 'Social Media Strategist',
+    stars: 5,
+    text: `Generating visuals for campaigns has never been easier. It saves me time and sparks fresh creative ideas every single time.`
+  },
+  {
+    image: profile_img_1,
+    name: 'Kunal Verma',
+    role: 'Brand Consultant',
+    stars: 5,
+    text: `Perfect for on-the-go ideation. I use it during client meetings to instantly create mood boards. A must-have creative tool!`
+  }
+];
+
 
 export const plans = [
     {
