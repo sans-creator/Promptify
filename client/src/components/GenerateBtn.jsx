@@ -14,31 +14,34 @@ const GenerateBtn = () => {
     } else {
       setShowLogin(true)
     }
-  } 
+  }
 
   return (
     <motion.div
-      initial={{ opacity: 0.2, y: 100 }}
-      transition={{ duration: 1 }}
+      initial={{ opacity: 0, y: 80 }}
       whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
       viewport={{ once: true }}
-      className='pb-16 text-center'
+      className='pb-16 text-center bg-gradient-to-b from-white to-gray-50 rounded-xl px-4 md:px-8'
     >
       <motion.h1
-        initial="initial"
-        animate="animate"
-        className='text-2xl md:text-3xl lg:text-4xl mt-4 font-semibold text-neutral-800 py-6 md:py-16'
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className='text-xl sm:text-2xl md:text-3xl font-semibold text-neutral-800 py-6'
       >
-        See The Magic. Try Now
+        See the Magic. Try Now ✨
       </motion.h1>
 
-      <button
+      <motion.button
+        whileHover={{ scale: 1.07 }}
+        whileTap={{ scale: 0.95 }}
         onClick={onClickHandler}
-        className='inline-flex items-center gap-2 px-12 py-3 rounded-full bg-black text-white m-auto hover:scale-105 transition-all duration-500'
+        className='inline-flex items-center gap-3 px-6 py-3 rounded-full bg-black text-white text-sm sm:text-base shadow-md hover:shadow-xl transition-all duration-300'
       >
         Generate Images
-        <img src={assets.star_group} alt="" className='h-6' />
-      </button>
+        <img src={assets.star_group} alt="sparkle" className='h-5 sm:h-6' />
+      </motion.button>
     </motion.div>
   )
 }

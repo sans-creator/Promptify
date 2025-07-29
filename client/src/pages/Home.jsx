@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../components/Header'
 import Steps from '../components/Steps'
 import Description from '../components/Description'
-import Testimonial from '../components/Testimonial'
+// import Testimonial from '../components/Testimonial'
 import Footer from '../components/Footer'
 import GenerateBtn from '../components/GenerateBtn'
 
@@ -12,7 +12,7 @@ const Home = () => {
       <Header/>
       <Steps/>
       <Description/>
-      <Testimonial/>
+      {/* <Testimonial/> */}
       <GenerateBtn/>
               
     </div>
