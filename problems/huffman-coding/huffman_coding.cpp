@@ -3,7 +3,6 @@
 #include <unordered_map>
 #include <vector>
 #include <algorithm>
-using namespace std;
 
 // Node structure for Huffman Tree
 struct Node {
@@ -13,7 +12,8 @@ struct Node {
     Node* left;
     Node* right;
     
-    Node(char s, int f, int o = 0) : symbol(s), frequency(f), order(o), left(nullptr), right(nullptr) {}
+    Node(char sym, int freq, int insertionOrder = 0) 
+        : symbol(sym), frequency(freq), order(insertionOrder), left(nullptr), right(nullptr) {}
 };
 
 // Comparator for priority queue (min-heap based on frequency)
@@ -41,7 +41,7 @@ struct Compare {
 };
 
 // Generate Huffman codes by traversing the tree
-void generateCodes(Node* root, string code, unordered_map<char, string>& huffmanCodes) {
+void generateCodes(Node* root, std::string code, std::unordered_map<char, std::string>& huffmanCodes) {
     if (!root) return;
     
     // If it's a leaf node, store the code
@@ -55,9 +55,17 @@ void generateCodes(Node* root, string code, unordered_map<char, string>& huffman
     generateCodes(root->right, code + "1", huffmanCodes);
 }
 
+// Recursively delete all nodes in the tree
+void deleteTree(Node* root) {
+    if (!root) return;
+    deleteTree(root->left);
+    deleteTree(root->right);
+    delete root;
+}
+
 // Build Huffman Tree and generate codes
-unordered_map<char, string> buildHuffmanTree(vector<pair<char, int>>& characters) {
-    priority_queue<Node*, vector<Node*>, Compare> minHeap;
+std::unordered_map<char, std::string> generateHuffmanCodes(std::vector<std::pair<char, int>>& characters) {
+    std::priority_queue<Node*, std::vector<Node*>, Compare> minHeap;
     
     int orderCounter = 0;
     // Create leaf nodes and add to priority queue
@@ -67,8 +75,10 @@ unordered_map<char, string> buildHuffmanTree(vector<pair<char, int>>& characters
     
     // Special case: if there's only one character
     if (minHeap.size() == 1) {
-        unordered_map<char, string> codes;
-        codes[minHeap.top()->symbol] = "0";
+        std::unordered_map<char, std::string> codes;
+        Node* singleNode = minHeap.top();
+        codes[singleNode->symbol] = "0";
+        delete singleNode;
         return codes;
     }
     
@@ -103,32 +113,36 @@ unordered_map<char, string> buildHuffmanTree(vector<pair<char, int>>& characters
     }
     
     // Generate codes from the tree
-    unordered_map<char, string> huffmanCodes;
-    generateCodes(minHeap.top(), "", huffmanCodes);
+    std::unordered_map<char, std::string> huffmanCodes;
+    Node* root = minHeap.top();
+    generateCodes(root, "", huffmanCodes);
+    
+    // Clean up memory
+    deleteTree(root);
     
     return huffmanCodes;
 }
 
 int main() {
     int n;
-    cin >> n;
+    std::cin >> n;
     
-    vector<pair<char, int>> characters;
+    std::vector<std::pair<char, int>> characters;
     
     // Read characters and their frequencies
     for (int i = 0; i < n; i++) {
         char symbol;
         int frequency;
-        cin >> symbol >> frequency;
+        std::cin >> symbol >> frequency;
         characters.push_back({symbol, frequency});
     }
     
     // Build Huffman tree and get codes
-    unordered_map<char, string> huffmanCodes = buildHuffmanTree(characters);
+    std::unordered_map<char, std::string> huffmanCodes = generateHuffmanCodes(characters);
     
     // Output in the same order as input
     for (auto& p : characters) {
-        cout << p.first << ": " << huffmanCodes[p.first] << endl;
+        std::cout << p.first << ": " << huffmanCodes[p.first] << std::endl;
     }
     
     return 0;
