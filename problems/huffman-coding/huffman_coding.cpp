@@ -1,0 +1,135 @@
+#include <iostream>
+#include <queue>
+#include <unordered_map>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+// Node structure for Huffman Tree
+struct Node {
+    char symbol;
+    int frequency;
+    int order; // To maintain stable ordering
+    Node* left;
+    Node* right;
+    
+    Node(char s, int f, int o = 0) : symbol(s), frequency(f), order(o), left(nullptr), right(nullptr) {}
+};
+
+// Comparator for priority queue (min-heap based on frequency)
+struct Compare {
+    bool operator()(Node* a, Node* b) {
+        // First compare by frequency
+        if (a->frequency != b->frequency) {
+            return a->frequency > b->frequency;
+        }
+        
+        // For equal frequencies, prioritize internal nodes over leaf nodes
+        bool aIsLeaf = (a->left == nullptr && a->right == nullptr);
+        bool bIsLeaf = (b->left == nullptr && b->right == nullptr);
+        
+        if (aIsLeaf && !bIsLeaf) {
+            return true; // Leaf nodes have higher priority value (come later)
+        }
+        if (!aIsLeaf && bIsLeaf) {
+            return false; // Internal nodes have lower priority value (come first)
+        }
+        
+        // If both are same type, use order
+        return a->order > b->order;
+    }
+};
+
+// Generate Huffman codes by traversing the tree
+void generateCodes(Node* root, string code, unordered_map<char, string>& huffmanCodes) {
+    if (!root) return;
+    
+    // If it's a leaf node, store the code
+    if (!root->left && !root->right) {
+        huffmanCodes[root->symbol] = code.empty() ? "0" : code;
+        return;
+    }
+    
+    // Traverse left with '0' and right with '1'
+    generateCodes(root->left, code + "0", huffmanCodes);
+    generateCodes(root->right, code + "1", huffmanCodes);
+}
+
+// Build Huffman Tree and generate codes
+unordered_map<char, string> buildHuffmanTree(vector<pair<char, int>>& characters) {
+    priority_queue<Node*, vector<Node*>, Compare> minHeap;
+    
+    int orderCounter = 0;
+    // Create leaf nodes and add to priority queue
+    for (auto& p : characters) {
+        minHeap.push(new Node(p.first, p.second, orderCounter++));
+    }
+    
+    // Special case: if there's only one character
+    if (minHeap.size() == 1) {
+        unordered_map<char, string> codes;
+        codes[minHeap.top()->symbol] = "0";
+        return codes;
+    }
+    
+    // Build the Huffman tree
+    while (minHeap.size() > 1) {
+        Node* first = minHeap.top();
+        minHeap.pop();
+        
+        Node* second = minHeap.top();
+        minHeap.pop();
+        
+        Node* left = first;
+        Node* right = second;
+        
+        // When frequencies are equal, ensure leaf nodes go to the left
+        if (first->frequency == second->frequency) {
+            bool firstIsLeaf = (first->left == nullptr && first->right == nullptr);
+            bool secondIsLeaf = (second->left == nullptr && second->right == nullptr);
+            if (!firstIsLeaf && secondIsLeaf) {
+                // First is internal, second is leaf - swap them
+                left = second;
+                right = first;
+            }
+        }
+        
+        // Create internal node with combined frequency
+        Node* internal = new Node('\0', left->frequency + right->frequency, orderCounter++);
+        internal->left = left;
+        internal->right = right;
+        
+        minHeap.push(internal);
+    }
+    
+    // Generate codes from the tree
+    unordered_map<char, string> huffmanCodes;
+    generateCodes(minHeap.top(), "", huffmanCodes);
+    
+    return huffmanCodes;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    
+    vector<pair<char, int>> characters;
+    
+    // Read characters and their frequencies
+    for (int i = 0; i < n; i++) {
+        char symbol;
+        int frequency;
+        cin >> symbol >> frequency;
+        characters.push_back({symbol, frequency});
+    }
+    
+    // Build Huffman tree and get codes
+    unordered_map<char, string> huffmanCodes = buildHuffmanTree(characters);
+    
+    // Output in the same order as input
+    for (auto& p : characters) {
+        cout << p.first << ": " << huffmanCodes[p.first] << endl;
+    }
+    
+    return 0;
+}
